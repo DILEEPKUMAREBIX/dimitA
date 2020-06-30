@@ -14,15 +14,13 @@ describe('SearchComponentComponent', () => {
   let subject: BehaviorSubject<any> = new BehaviorSubject(innerTestParams);
   const formBuilder: FormBuilder = new FormBuilder();
 
-
   let params = subject.asObservable();
   let queryParams = subject.asObservable();
 
   const fakeActivatedRoute = {
     snapshot: { data: {} },
-    queryParams: queryParams
+    queryParams: queryParams,
   } as ActivatedRoute;
-
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,5 +43,20 @@ describe('SearchComponentComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Check values populated', () => {
+    // Arrange
+    const element = fixture.nativeElement;
+    const patchIdInput: any = document.getElementById('patchId');
+    const startDateInput: any = document.getElementById('startDate');
+    const endDateInput: any = document.getElementById('endDate');
+    fixture.detectChanges();
+
+    // Assert
+    // expect(patchIdInput.value).toBe('32990');
+    expect(patchIdInput.value).toBe('32990');
+    expect(startDateInput.value).toBe('2018-01-09');
+    expect(endDateInput.value).toBe('2018-01-15');
   });
 });
